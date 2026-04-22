@@ -1,0 +1,1172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HAUS — Premium Footwear & Bags</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* =====================================================
+   HAUS — Design System
+   ===================================================== */
+:root {
+  --bg:           #FAF8F5;
+  --bg-alt:       #F3EFE9;
+  --ink:          #0F0E0C;
+  --ink-2:        #2A2825;
+  --ink-light:    #6B6560;
+  --accent:       #C4622D;
+  --accent-2:     #A0501F;
+  --gold:         #B8925A;
+  --white:        #FFFFFF;
+  --border:       rgba(15,14,12,0.10);
+  --border-light: rgba(15,14,12,0.06);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Outfit', -apple-system, sans-serif;
+  --max-w: 1320px;
+  --hdr:   68px;
+  --ease:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --t:     0.32s var(--ease);
+  --t-slow:0.6s  var(--ease);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--ink); overflow-x: hidden; line-height: 1.6; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: var(--font-body); border: none; background: none; }
+img { display: block; max-width: 100%; }
+
+h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.08; letter-spacing: -0.025em; }
+h1 { font-size: clamp(3rem, 7vw, 6.5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+h3 { font-size: clamp(1.2rem, 2vw, 1.6rem); }
+em, i { font-style: italic; }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+.section { padding: 6rem 0; }
+.section--alt { background: var(--bg-alt); }
+.section--dark { background: var(--ink-2); color: var(--bg); }
+
+.tag { display: inline-block; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3.5rem; gap: 1.5rem; flex-wrap: wrap; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-body); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 2rem; border: 1.5px solid transparent; transition: background var(--t), color var(--t), border-color var(--t), transform var(--t); cursor: pointer; white-space: nowrap; }
+.btn-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn-primary:hover { background: var(--ink-2); transform: translateY(-2px); }
+.btn-accent { background: var(--accent); color: var(--white); border-color: var(--accent); }
+.btn-accent:hover { background: var(--accent-2); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-outline:hover { background: var(--ink); color: var(--bg); }
+.btn-outline-light { background: transparent; color: var(--bg); border-color: rgba(250,248,245,0.5); }
+.btn-outline-light:hover { background: rgba(250,248,245,0.1); border-color: var(--bg); }
+.btn-ghost { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); border-bottom: 1px solid var(--border); padding: 0 0 2px; transition: color var(--t), border-color var(--t); display: inline-flex; align-items: center; gap: 0.4rem; }
+.btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+.btn-ghost .arrow { display: inline-block; transition: transform var(--t); }
+.btn-ghost:hover .arrow { transform: translateX(5px); }
+
+/* ── HEADER ── */
+.site-header { position: fixed; inset: 0 0 auto 0; z-index: 200; height: var(--hdr); background: var(--bg); border-bottom: 1px solid var(--border); transition: box-shadow var(--t), background var(--t), border-color var(--t); }
+.site-header.scrolled { box-shadow: 0 2px 40px rgba(15,14,12,0.07); }
+.site-header.hero-top { background: transparent; border-color: transparent; }
+.site-header.hero-top .nav-link,
+.site-header.hero-top .nav-logo { color: var(--bg); }
+.site-header.hero-top .hamburger span { background: var(--bg); }
+
+.nav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; height: var(--hdr); display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; letter-spacing: 0.15em; color: var(--ink); cursor: pointer; transition: color var(--t), opacity var(--t); }
+.nav-logo:hover { opacity: 0.7; }
+.nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+.nav-link { font-size: 0.73rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); cursor: pointer; transition: color var(--t); position: relative; }
+.nav-link::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width var(--t); }
+.nav-link:hover { color: var(--ink); }
+.nav-link:hover::after { width: 100%; }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; width: 26px; padding: 3px; }
+.hamburger span { display: block; height: 1.5px; background: var(--ink); transition: transform var(--t), opacity var(--t); }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-nav { display: none; flex-direction: column; background: var(--bg); border-top: 1px solid var(--border); padding: 1.5rem 2rem 2.5rem; position: fixed; top: var(--hdr); left: 0; right: 0; z-index: 199; }
+.mobile-nav.open { display: flex; }
+.mobile-nav a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); padding: 0.9rem 0; border-bottom: 1px solid var(--border-light); cursor: pointer; transition: color var(--t); }
+.mobile-nav a:hover { color: var(--ink); }
+
+/* ── HERO ── */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: var(--ink-2); }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(196,98,45,0.18) 0%, transparent 60%), radial-gradient(ellipse 50% 70% at 20% 80%, rgba(184,146,90,0.10) 0%, transparent 50%), linear-gradient(135deg, #1a1814 0%, #0F0E0C 100%); }
+.hero-bg::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(-30deg, transparent, transparent 80px, rgba(255,255,255,0.02) 80px, rgba(255,255,255,0.02) 81px), repeating-linear-gradient(60deg, transparent, transparent 120px, rgba(196,98,45,0.04) 120px, rgba(196,98,45,0.04) 121px); }
+
+.hero-content { position: relative; z-index: 2; max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; padding-top: var(--hdr); width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 100vh; }
+.hero-text { padding: 4rem 0; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+.hero h1 { color: var(--bg); margin-bottom: 1.75rem; font-weight: 300; }
+.hero h1 em { color: var(--accent); font-weight: 400; }
+.hero-sub { font-size: 1rem; color: rgba(250,248,245,0.5); font-weight: 300; line-height: 1.8; max-width: 420px; margin-bottom: 3rem; }
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.08); }
+.hero-stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: var(--bg); line-height: 1; margin-bottom: 0.3rem; }
+.hero-stat-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250,248,245,0.35); }
+
+.hero-visual { position: relative; display: flex; flex-direction: column; gap: 1.5rem; padding: 4rem 0; }
+.hero-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 1.75rem; display: flex; align-items: center; gap: 1.25rem; backdrop-filter: blur(10px); transition: background var(--t), border-color var(--t); animation: floatCard 6s ease-in-out infinite; }
+.hero-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); }
+.hero-card:nth-child(2) { animation-delay: -2s; margin-left: 2rem; }
+.hero-card:nth-child(3) { animation-delay: -4s; margin-left: 1rem; }
+@keyframes floatCard { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.hero-card-icon { width: 52px; height: 52px; border-radius: 50%; background: rgba(196,98,45,0.15); border: 1px solid rgba(196,98,45,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hero-card-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+.hero-card-text { flex: 1; }
+.hero-card-title { font-size: 0.8rem; font-weight: 600; color: var(--bg); margin-bottom: 0.2rem; letter-spacing: 0.03em; }
+.hero-card-sub { font-size: 0.68rem; color: rgba(250,248,245,0.4); }
+.hero-card-price { font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; color: var(--accent); }
+
+.hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; z-index: 2; }
+.hero-scroll span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250,248,245,0.3); }
+.hero-scroll-line { width: 1px; height: 40px; background: rgba(250,248,245,0.15); position: relative; overflow: hidden; }
+.hero-scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: var(--accent); animation: scrollDrop 2s ease-in-out infinite; }
+@keyframes scrollDrop { 0%{top:-100%} 100%{top:100%} }
+
+/* ── MARQUEE ── */
+.marquee-bar { background: var(--accent); padding: 0.85rem 0; overflow: hidden; }
+.marquee-track { display: flex; gap: 3rem; white-space: nowrap; animation: marquee 25s linear infinite; }
+.marquee-track span { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.85); flex-shrink: 0; }
+.marquee-track .dot { color: rgba(255,255,255,0.4); }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── FEATURED ── */
+.featured-section { padding: 7rem 0; }
+.featured-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4.5rem; }
+.featured-intro-desc { font-size: 0.95rem; color: var(--ink-light); line-height: 1.8; max-width: 380px; font-weight: 300; }
+.featured-products-row { display: flex; flex-wrap: wrap; gap: 1.5rem; background: var(--bg-alt); border: 1px solid var(--border); padding: 2.5rem; justify-content: center; }
+.featured-products-row > div { flex: 1 1 180px; min-width: 160px; max-width: 240px; }
+
+/* ── CATEGORIES ── */
+.categories-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.cat-card { position: relative; overflow: hidden; border-radius: 3px; cursor: pointer; aspect-ratio: 4/3; background: var(--ink-2); }
+.cat-card-bg { position: absolute; inset: 0; transition: transform var(--t-slow); }
+.cat-card:hover .cat-card-bg { transform: scale(1.06); }
+.cat-card--shoes .cat-card-bg { background: radial-gradient(ellipse 70% 80% at 60% 40%, rgba(196,98,45,0.3) 0%, transparent 60%), linear-gradient(135deg, #2a1f18 0%, #1a1512 100%); }
+.cat-card--shoes .cat-card-bg::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(196,98,45,0.05) 30px, rgba(196,98,45,0.05) 31px); }
+.cat-card--bags .cat-card-bg { background: radial-gradient(ellipse 70% 80% at 40% 60%, rgba(184,146,90,0.25) 0%, transparent 60%), linear-gradient(135deg, #1a1a18 0%, #111110 100%); }
+.cat-card--bags .cat-card-bg::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(184,146,90,0.04) 30px, rgba(184,146,90,0.04) 31px); }
+.cat-card-icon { position: absolute; bottom: 2.5rem; right: 2.5rem; width: 80px; height: 80px; opacity: 0.12; transition: opacity var(--t), transform var(--t-slow); }
+.cat-card:hover .cat-card-icon { opacity: 0.22; transform: scale(1.1) rotate(5deg); }
+.cat-card-icon svg { width: 100%; height: 100%; stroke: var(--bg); fill: none; stroke-width: 1; }
+.cat-card-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem; background: linear-gradient(to top, rgba(15,14,12,0.85) 0%, transparent 55%); }
+.cat-card-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+.cat-card-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 300; color: var(--bg); line-height: 1.1; margin-bottom: 1.25rem; }
+.cat-card-cta { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bg); opacity: 0; transform: translateY(8px); transition: opacity var(--t), transform var(--t); }
+.cat-card:hover .cat-card-cta { opacity: 1; transform: translateY(0); }
+.cat-card-cta svg { width: 14px; height: 14px; transition: transform var(--t); }
+.cat-card:hover .cat-card-cta svg { transform: translateX(4px); }
+
+/* ── COLLECTION SECTIONS ── */
+.collection-section { padding: 6rem 0; }
+.collection-section.section--alt { background: var(--bg-alt); }
+.collection-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+.collection-num { font-family: var(--font-display); font-size: 5rem; font-weight: 300; color: var(--border); line-height: 1; margin-bottom: -1rem; user-select: none; }
+.shopify-collection-wrap { width: 100%; overflow: visible; }
+.shopify-collection-wrap > div { width: 100% !important; }
+
+/* ── DIVIDER ── */
+.divider-strip { background: var(--ink); padding: 5rem 0; text-align: center; position: relative; overflow: hidden; }
+.divider-strip::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(196,98,45,0.15) 0%, transparent 70%); }
+.divider-strip-content { position: relative; z-index: 1; }
+.divider-strip blockquote { font-family: var(--font-display); font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-weight: 300; font-style: italic; color: var(--bg); max-width: 800px; margin: 0 auto 2rem; line-height: 1.3; }
+.divider-strip cite { font-family: var(--font-body); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250,248,245,0.35); font-style: normal; display: block; }
+
+/* ── TRUST ── */
+.trust-section { padding: 5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+.trust-card { background: var(--bg); padding: 2.5rem 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.trust-icon { color: var(--accent); margin-bottom: 0.25rem; }
+.trust-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.trust-title { font-family: var(--font-display); font-size: 1rem; font-weight: 400; }
+.trust-desc { font-size: 0.82rem; color: var(--ink-light); line-height: 1.65; font-weight: 300; }
+
+/* ── FOOTER ── */
+.site-footer { background: var(--ink); color: var(--bg); padding: 5rem 0 0; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 2fr 1.2fr; gap: 4rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-logo { font-family: var(--font-display); font-size: 2rem; font-weight: 600; letter-spacing: 0.15em; color: var(--bg); cursor: pointer; margin-bottom: 1rem; display: block; }
+.footer-tagline { font-family: var(--font-display); font-size: 0.9rem; font-style: italic; color: rgba(250,248,245,0.35); font-weight: 300; line-height: 1.6; }
+.footer-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.footer-col h5 { font-family: var(--font-body); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-col li a { font-size: 0.83rem; color: rgba(250,248,245,0.45); font-weight: 300; transition: color var(--t); }
+.footer-col li a:hover { color: var(--bg); }
+.footer-newsletter h5 { font-family: var(--font-body); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+.footer-newsletter p { font-size: 0.82rem; color: rgba(250,248,245,0.35); line-height: 1.65; margin-bottom: 1.25rem; font-weight: 300; }
+.nl-form { display: flex; border: 1px solid rgba(255,255,255,0.12); overflow: hidden; }
+.nl-form input { flex: 1; background: transparent; border: none; padding: 0.75rem 1rem; font-size: 0.8rem; color: var(--bg); outline: none; font-family: var(--font-body); }
+.nl-form input::placeholder { color: rgba(250,248,245,0.25); }
+.nl-form button { background: var(--accent); color: var(--white); padding: 0 1.25rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; transition: background var(--t); }
+.nl-form button:hover { background: var(--accent-2); }
+.footer-bottom { padding: 1.5rem 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.72rem; color: rgba(250,248,245,0.25); }
+.footer-legal { display: flex; gap: 2rem; }
+.footer-legal a { font-size: 0.72rem; color: rgba(250,248,245,0.25); transition: color var(--t); }
+.footer-legal a:hover { color: rgba(250,248,245,0.6); }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .hero-text { padding: 5rem 0 3rem; }
+  .featured-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .footer-newsletter { grid-column: span 2; }
+}
+@media (max-width: 768px) {
+  :root { --hdr: 60px; }
+  .section { padding: 4rem 0; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .categories-grid { grid-template-columns: 1fr; }
+  .featured-products-row { padding: 1.5rem; gap: 1rem; }
+  .featured-products-row > div { max-width: 100%; flex: 1 1 140px; }
+  .collection-header { flex-direction: column; align-items: flex-start; }
+  .collection-num { font-size: 3rem; }
+  .hero-stats { flex-direction: column; gap: 1.5rem; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .footer-newsletter { grid-column: auto; }
+  .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+  .hero-ctas { flex-direction: column; }
+  .btn { justify-content: center; text-align: center; }
+  .featured-section { padding: 4rem 0; }
+  .featured-intro { margin-bottom: 2.5rem; }
+}
+@media (max-width: 480px) {
+  .footer-links-grid { grid-template-columns: 1fr; }
+  .featured-products-row { flex-direction: column; }
+  .featured-products-row > div { max-width: 100%; }
+  .trust-card { padding: 1.75rem 1.5rem; }
+  .hero-stats { gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====================================================
+     HEADER
+     ==================================================== -->
+<header class="site-header hero-top" id="site-header">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">HAUS</a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#featured">Featured</a></li>
+      <li><a class="nav-link" href="#categories">Collections</a></li>
+      <li><a class="nav-link" href="#shoes">Shoes</a></li>
+      <li><a class="nav-link" href="#bags">Bags</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#featured">Featured</a>
+    <a href="#categories">Collections</a>
+    <a href="#shoes">Shoes</a>
+    <a href="#bags">Bags</a>
+  </div>
+</header>
+
+<!-- ====================================================
+     HERO
+     ==================================================== -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+
+    <div class="hero-text">
+      <span class="hero-eyebrow">New Season 2026</span>
+      <h1>Style that<br /><em>speaks</em><br />for itself.</h1>
+      <p class="hero-sub">Premium footwear and bags designed for those who move through the world with intention. Crafted to last, built to impress.</p>
+      <div class="hero-ctas">
+        <a href="#shoes" class="btn btn-accent">Shop Now</a>
+        <a href="#categories" class="btn btn-outline-light">View Collections</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">200+</div>
+          <div class="hero-stat-label">Products</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">50k+</div>
+          <div class="hero-stat-label">Happy Customers</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">4.9★</div>
+          <div class="hero-stat-label">Average Rating</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="hero-card-text">
+          <div class="hero-card-title">Best Seller — Classic Low</div>
+          <div class="hero-card-sub">Shoes Collection</div>
+        </div>
+        <div class="hero-card-price">$380</div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <div class="hero-card-text">
+          <div class="hero-card-title">Editor's Pick — Studio Tote</div>
+          <div class="hero-card-sub">Bags Collection</div>
+        </div>
+        <div class="hero-card-price">$280</div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="hero-card-text">
+          <div class="hero-card-title">New Arrival — Chelsea Boot</div>
+          <div class="hero-card-sub">Limited Edition</div>
+        </div>
+        <div class="hero-card-price">$520</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ====================================================
+     MARQUEE
+     ==================================================== -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span>Premium Quality</span><span class="dot">·</span>
+    <span>Free Shipping</span><span class="dot">·</span>
+    <span>Handcrafted</span><span class="dot">·</span>
+    <span>30-Day Returns</span><span class="dot">·</span>
+    <span>Globally Shipped</span><span class="dot">·</span>
+    <span>Premium Quality</span><span class="dot">·</span>
+    <span>Free Shipping</span><span class="dot">·</span>
+    <span>Handcrafted</span><span class="dot">·</span>
+    <span>30-Day Returns</span><span class="dot">·</span>
+    <span>Globally Shipped</span><span class="dot">·</span>
+    <span>Premium Quality</span><span class="dot">·</span>
+    <span>Free Shipping</span><span class="dot">·</span>
+    <span>Handcrafted</span><span class="dot">·</span>
+    <span>30-Day Returns</span><span class="dot">·</span>
+    <span>Globally Shipped</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- ====================================================
+     FEATURED PRODUCTS
+     Individual Shopify product buttons — untouched
+     ==================================================== -->
+<section class="featured-section" id="featured">
+  <div class="container">
+
+    <div class="featured-intro reveal">
+      <div class="featured-intro-text">
+        <div class="tag">Handpicked for You</div>
+        <h2>Featured<br /><em>Pieces</em></h2>
+      </div>
+      <p class="featured-intro-desc">Each item is chosen for its design integrity, quality of craft, and staying power. These are pieces that transcend the moment.</p>
+    </div>
+
+    <div class="featured-products-row reveal">
+
+      <!-- ================================================
+           SHOPIFY PRODUCT 1 — DO NOT MODIFY
+           ================================================ -->
+      <div id='product-component-1776784940616'></div>
+      <script type="text/javascript">
+      /*<![CDATA[*/
+      (function () {
+        var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+        if (window.ShopifyBuy) {
+          if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
+        } else { loadScript(); }
+        function loadScript() {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = scriptURL;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+          script.onload = ShopifyBuyInit;
+        }
+        function ShopifyBuyInit() {
+          var client = ShopifyBuy.buildClient({
+            domain: 'mxkmds-if.myshopify.com',
+            storefrontAccessToken: '38e261ea03b7cb739614123a878f1238',
+          });
+          ShopifyBuy.UI.onReady(client).then(function (ui) {
+            ui.createComponent('product', {
+              id: '10251098620204',
+              node: document.getElementById('product-component-1776784940616'),
+              moneyFormat: '%24%7B%7Bamount%7D%7D',
+              options: {
+        "product": {
+          "styles": {
+            "product": {
+              "@media (min-width: 601px)": {
+                "max-width": "calc(25% - 20px)",
+                "margin-left": "20px",
+                "margin-bottom": "50px"
+              }
+            },
+            "button": {
+              "font-family": "Arial, sans-serif",
+              ":hover": { "background-color": "#49b132" },
+              "background-color": "#51c537",
+              ":focus": { "background-color": "#49b132" },
+              "border-radius": "40px"
+            }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "-20px" } } } },
+        "modalProduct": {
+          "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "option": {},
+        "cart": { "styles": { "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" } }, "text": { "total": "Subtotal", "button": "Checkout" } },
+        "toggle": { "styles": { "toggle": { "font-family": "Arial, sans-serif", "background-color": "#51c537", ":hover": { "background-color": "#49b132" }, ":focus": { "background-color": "#49b132" } } } }
+      },
+            });
+          });
+        }
+      })();
+      /*]]>*/
+      </script>
+
+      <!-- ================================================
+           SHOPIFY PRODUCT 2 — DO NOT MODIFY
+           ================================================ -->
+      <div id='product-component-1776785334652'></div>
+      <script type="text/javascript">
+      /*<![CDATA[*/
+      (function () {
+        var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+        if (window.ShopifyBuy) {
+          if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
+        } else { loadScript(); }
+        function loadScript() {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = scriptURL;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+          script.onload = ShopifyBuyInit;
+        }
+        function ShopifyBuyInit() {
+          var client = ShopifyBuy.buildClient({
+            domain: 'mxkmds-if.myshopify.com',
+            storefrontAccessToken: '38e261ea03b7cb739614123a878f1238',
+          });
+          ShopifyBuy.UI.onReady(client).then(function (ui) {
+            ui.createComponent('product', {
+              id: '10251893080364',
+              node: document.getElementById('product-component-1776785334652'),
+              moneyFormat: '%24%7B%7Bamount%7D%7D',
+              options: {
+        "product": {
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "calc(25% - 20px)", "margin-left": "20px", "margin-bottom": "50px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "-20px" } } } },
+        "modalProduct": {
+          "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "option": {},
+        "cart": { "styles": { "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" } }, "text": { "total": "Subtotal", "button": "Checkout" } },
+        "toggle": { "styles": { "toggle": { "font-family": "Arial, sans-serif", "background-color": "#51c537", ":hover": { "background-color": "#49b132" }, ":focus": { "background-color": "#49b132" } } } }
+      },
+            });
+          });
+        }
+      })();
+      /*]]>*/
+      </script>
+
+      <!-- ================================================
+           SHOPIFY PRODUCT 3 — DO NOT MODIFY
+           ================================================ -->
+      <div id='product-component-1776785403735'></div>
+      <script type="text/javascript">
+      /*<![CDATA[*/
+      (function () {
+        var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+        if (window.ShopifyBuy) {
+          if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
+        } else { loadScript(); }
+        function loadScript() {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = scriptURL;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+          script.onload = ShopifyBuyInit;
+        }
+        function ShopifyBuyInit() {
+          var client = ShopifyBuy.buildClient({
+            domain: 'mxkmds-if.myshopify.com',
+            storefrontAccessToken: '38e261ea03b7cb739614123a878f1238',
+          });
+          ShopifyBuy.UI.onReady(client).then(function (ui) {
+            ui.createComponent('product', {
+              id: '10251103306028',
+              node: document.getElementById('product-component-1776785403735'),
+              moneyFormat: '%24%7B%7Bamount%7D%7D',
+              options: {
+        "product": {
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "calc(25% - 20px)", "margin-left": "20px", "margin-bottom": "50px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "-20px" } } } },
+        "modalProduct": {
+          "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "option": {},
+        "cart": { "styles": { "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" } }, "text": { "total": "Subtotal", "button": "Checkout" } },
+        "toggle": { "styles": { "toggle": { "font-family": "Arial, sans-serif", "background-color": "#51c537", ":hover": { "background-color": "#49b132" }, ":focus": { "background-color": "#49b132" } } } }
+      },
+            });
+          });
+        }
+      })();
+      /*]]>*/
+      </script>
+
+      <!-- ================================================
+           SHOPIFY PRODUCT 4 — DO NOT MODIFY
+           ================================================ -->
+      <div id='product-component-1776785444332'></div>
+      <script type="text/javascript">
+      /*<![CDATA[*/
+      (function () {
+        var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+        if (window.ShopifyBuy) {
+          if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
+        } else { loadScript(); }
+        function loadScript() {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = scriptURL;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+          script.onload = ShopifyBuyInit;
+        }
+        function ShopifyBuyInit() {
+          var client = ShopifyBuy.buildClient({
+            domain: 'mxkmds-if.myshopify.com',
+            storefrontAccessToken: '38e261ea03b7cb739614123a878f1238',
+          });
+          ShopifyBuy.UI.onReady(client).then(function (ui) {
+            ui.createComponent('product', {
+              id: '10250883268908',
+              node: document.getElementById('product-component-1776785444332'),
+              moneyFormat: '%24%7B%7Bamount%7D%7D',
+              options: {
+        "product": {
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "calc(25% - 20px)", "margin-left": "20px", "margin-bottom": "50px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "-20px" } } } },
+        "modalProduct": {
+          "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "option": {},
+        "cart": { "styles": { "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" } }, "text": { "total": "Subtotal", "button": "Checkout" } },
+        "toggle": { "styles": { "toggle": { "font-family": "Arial, sans-serif", "background-color": "#51c537", ":hover": { "background-color": "#49b132" }, ":focus": { "background-color": "#49b132" } } } }
+      },
+            });
+          });
+        }
+      })();
+      /*]]>*/
+      </script>
+
+      <!-- ================================================
+           SHOPIFY PRODUCT 5 — DO NOT MODIFY
+           ================================================ -->
+      <div id='product-component-1776785473233'></div>
+      <script type="text/javascript">
+      /*<![CDATA[*/
+      (function () {
+        var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+        if (window.ShopifyBuy) {
+          if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
+        } else { loadScript(); }
+        function loadScript() {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = scriptURL;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+          script.onload = ShopifyBuyInit;
+        }
+        function ShopifyBuyInit() {
+          var client = ShopifyBuy.buildClient({
+            domain: 'mxkmds-if.myshopify.com',
+            storefrontAccessToken: '38e261ea03b7cb739614123a878f1238',
+          });
+          ShopifyBuy.UI.onReady(client).then(function (ui) {
+            ui.createComponent('product', {
+              id: '10251110646060',
+              node: document.getElementById('product-component-1776785473233'),
+              moneyFormat: '%24%7B%7Bamount%7D%7D',
+              options: {
+        "product": {
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "calc(25% - 20px)", "margin-left": "20px", "margin-bottom": "50px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "-20px" } } } },
+        "modalProduct": {
+          "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "option": {},
+        "cart": { "styles": { "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" } }, "text": { "total": "Subtotal", "button": "Checkout" } },
+        "toggle": { "styles": { "toggle": { "font-family": "Arial, sans-serif", "background-color": "#51c537", ":hover": { "background-color": "#49b132" }, ":focus": { "background-color": "#49b132" } } } }
+      },
+            });
+          });
+        }
+      })();
+      /*]]>*/
+      </script>
+
+    </div><!-- /.featured-products-row -->
+  </div>
+</section>
+
+<!-- ====================================================
+     CATEGORIES
+     ==================================================== -->
+<section class="section section--alt" id="categories">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">Browse</div>
+        <h2>Our <em>Collections</em></h2>
+      </div>
+      <p style="max-width:340px; font-size:0.9rem; color:var(--ink-light); font-weight:300; line-height:1.7;">Two categories. One commitment to excellence. Shoes engineered for the pavement, bags built for the journey.</p>
+    </div>
+    <div class="categories-grid">
+
+      <div class="cat-card cat-card--shoes reveal" onclick="document.getElementById('shoes').scrollIntoView({behavior:'smooth'})">
+        <div class="cat-card-bg"></div>
+        <div class="cat-card-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 52 C8 52, 20 30, 40 28 C60 26, 70 38, 72 45 C74 52, 68 58, 50 60 C32 62, 8 58, 8 52 Z"/>
+            <path d="M20 52 C20 46, 28 40, 40 38"/>
+            <circle cx="55" cy="42" r="3"/>
+            <path d="M45 35 L48 28"/>
+          </svg>
+        </div>
+        <div class="cat-card-content">
+          <div class="cat-card-label">Collection 01</div>
+          <div class="cat-card-title">Footwear</div>
+          <span class="cat-card-cta">
+            Shop Shoes
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="cat-card cat-card--bags reveal" onclick="document.getElementById('bags').scrollIntoView({behavior:'smooth'})">
+        <div class="cat-card-bg"></div>
+        <div class="cat-card-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="30" width="50" height="38" rx="4"/>
+            <path d="M28 30 C28 18, 52 18, 52 30"/>
+            <line x1="15" y1="45" x2="65" y2="45"/>
+            <circle cx="40" cy="37" r="3"/>
+          </svg>
+        </div>
+        <div class="cat-card-content">
+          <div class="cat-card-label">Collection 02</div>
+          <div class="cat-card-title">Bags</div>
+          <span class="cat-card-cta">
+            Shop Bags
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     DIVIDER QUOTE
+     ==================================================== -->
+<div class="divider-strip">
+  <div class="divider-strip-content container">
+    <blockquote>"Wear what you love. Love what you wear."</blockquote>
+    <cite>— The HAUS Promise</cite>
+  </div>
+</div>
+
+<!-- ====================================================
+     SHOES COLLECTION
+     Shopify collection embed — DO NOT MODIFY script
+     ==================================================== -->
+<section class="collection-section" id="shoes">
+  <div class="container">
+    <div class="collection-header reveal">
+      <div class="collection-title-block">
+        <div class="collection-num">01</div>
+        <div>
+          <div class="tag">Footwear Collection</div>
+          <h2>Our <em>Shoes</em></h2>
+        </div>
+      </div>
+      <a href="#bags" class="btn-ghost">View Bags <span class="arrow">→</span></a>
+    </div>
+
+    <div class="shopify-collection-wrap reveal">
+      <!-- ================================================
+           SHOPIFY SHOES COLLECTION — DO NOT MODIFY
+           ================================================ -->
+      <div id='collection-component-1776785108845'></div>
+      <script type="text/javascript">
+      /*<![CDATA[*/
+      (function () {
+        var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+        if (window.ShopifyBuy) {
+          if (window.ShopifyBuy.UI) {
+            ShopifyBuyInit();
+          } else {
+            loadScript();
+          }
+        } else {
+          loadScript();
+        }
+        function loadScript() {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = scriptURL;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+          script.onload = ShopifyBuyInit;
+        }
+        function ShopifyBuyInit() {
+          var client = ShopifyBuy.buildClient({
+            domain: 'mxkmds-if.myshopify.com',
+            storefrontAccessToken: '38e261ea03b7cb739614123a878f1238',
+          });
+          ShopifyBuy.UI.onReady(client).then(function (ui) {
+            ui.createComponent('collection', {
+              id: '502832136492',
+              node: document.getElementById('collection-component-1776785108845'),
+              moneyFormat: '%24%7B%7Bamount%7D%7D',
+              options: {
+        "product": {
+          "styles": {
+            "product": {
+              "@media (min-width: 601px)": {
+                "max-width": "calc(25% - 20px)",
+                "margin-left": "20px",
+                "margin-bottom": "50px",
+                "width": "calc(25% - 20px)"
+              },
+              "img": {
+                "height": "calc(100% - 15px)",
+                "position": "absolute",
+                "left": "0",
+                "right": "0",
+                "top": "0"
+              },
+              "imgWrapper": {
+                "padding-top": "calc(75% + 15px)",
+                "position": "relative",
+                "height": "0"
+              }
+            },
+            "button": {
+              "font-family": "Arial, sans-serif",
+              ":hover": { "background-color": "#49b132" },
+              "background-color": "#51c537",
+              ":focus": { "background-color": "#49b132" },
+              "border-radius": "40px"
+            }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "-20px" } } } },
+        "modalProduct": {
+          "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "option": {},
+        "cart": { "styles": { "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" } }, "text": { "total": "Subtotal", "button": "Checkout" } },
+        "toggle": { "styles": { "toggle": { "font-family": "Arial, sans-serif", "background-color": "#51c537", ":hover": { "background-color": "#49b132" }, ":focus": { "background-color": "#49b132" } } } }
+      },
+            });
+          });
+        }
+      })();
+      /*]]>*/
+      </script>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====================================================
+     BAGS COLLECTION
+     Shopify collection embed — DO NOT MODIFY script
+     ==================================================== -->
+<section class="collection-section section--alt" id="bags">
+  <div class="container">
+    <div class="collection-header reveal">
+      <div class="collection-title-block">
+        <div class="collection-num">02</div>
+        <div>
+          <div class="tag">Bags Collection</div>
+          <h2>Our <em>Bags</em></h2>
+        </div>
+      </div>
+      <a href="#shoes" class="btn-ghost">View Shoes <span class="arrow">→</span></a>
+    </div>
+
+    <div class="shopify-collection-wrap reveal">
+      <!-- ================================================
+           SHOPIFY BAGS COLLECTION — DO NOT MODIFY
+           ================================================ -->
+      <div id='collection-component-1776785539790'></div>
+      <script type="text/javascript">
+      /*<![CDATA[*/
+      (function () {
+        var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+        if (window.ShopifyBuy) {
+          if (window.ShopifyBuy.UI) {
+            ShopifyBuyInit();
+          } else {
+            loadScript();
+          }
+        } else {
+          loadScript();
+        }
+        function loadScript() {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = scriptURL;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+          script.onload = ShopifyBuyInit;
+        }
+        function ShopifyBuyInit() {
+          var client = ShopifyBuy.buildClient({
+            domain: 'mxkmds-if.myshopify.com',
+            storefrontAccessToken: '38e261ea03b7cb739614123a878f1238',
+          });
+          ShopifyBuy.UI.onReady(client).then(function (ui) {
+            ui.createComponent('collection', {
+              id: '502444294444',
+              node: document.getElementById('collection-component-1776785539790'),
+              moneyFormat: '%24%7B%7Bamount%7D%7D',
+              options: {
+        "product": {
+          "styles": {
+            "product": {
+              "@media (min-width: 601px)": {
+                "max-width": "calc(25% - 20px)",
+                "margin-left": "20px",
+                "margin-bottom": "50px",
+                "width": "calc(25% - 20px)"
+              },
+              "img": {
+                "height": "calc(100% - 15px)",
+                "position": "absolute",
+                "left": "0",
+                "right": "0",
+                "top": "0"
+              },
+              "imgWrapper": {
+                "padding-top": "calc(75% + 15px)",
+                "position": "relative",
+                "height": "0"
+              }
+            },
+            "button": {
+              "font-family": "Arial, sans-serif",
+              ":hover": { "background-color": "#49b132" },
+              "background-color": "#51c537",
+              ":focus": { "background-color": "#49b132" },
+              "border-radius": "40px"
+            }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "-20px" } } } },
+        "modalProduct": {
+          "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } },
+            "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" }
+          },
+          "text": { "button": "Add to cart" }
+        },
+        "option": {},
+        "cart": { "styles": { "button": { "font-family": "Arial, sans-serif", ":hover": { "background-color": "#49b132" }, "background-color": "#51c537", ":focus": { "background-color": "#49b132" }, "border-radius": "40px" } }, "text": { "total": "Subtotal", "button": "Checkout" } },
+        "toggle": { "styles": { "toggle": { "font-family": "Arial, sans-serif", "background-color": "#51c537", ":hover": { "background-color": "#49b132" }, ":focus": { "background-color": "#49b132" } } } }
+      },
+            });
+          });
+        }
+      })();
+      /*]]>*/
+      </script>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====================================================
+     TRUST / VALUE PROPS
+     ==================================================== -->
+<section class="trust-section">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="trust-title">Premium Quality</div>
+        <div class="trust-desc">Every product is crafted with carefully selected materials held to the highest standards.</div>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="trust-title">Worldwide Shipping</div>
+        <div class="trust-desc">Fast tracked delivery globally. Free shipping on orders over $300.</div>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
+        <div class="trust-title">30-Day Returns</div>
+        <div class="trust-desc">Easy returns within 30 days of delivery. No questions asked.</div>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="trust-title">50k+ Happy Customers</div>
+        <div class="trust-desc">A 4.9-star average rating trusted by customers across the globe.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     FOOTER
+     ==================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="footer-logo">HAUS</a>
+        <p class="footer-tagline">Premium footwear and bags for those who move with intention.</p>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="#shoes">Shoes</a></li>
+            <li><a href="#bags">Bags</a></li>
+            <li><a href="#featured">Featured</a></li>
+            <li><a href="#categories">All Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Support</h5>
+          <ul>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">Care Guide</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-newsletter">
+        <h5>Stay in the Loop</h5>
+        <p>New drops, exclusive offers, and stories — straight to your inbox.</p>
+        <div class="nl-form">
+          <input type="email" placeholder="your@email.com" id="nl-email" />
+          <button type="button" id="nl-btn">Join</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 HAUS. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ====================================================
+     JAVASCRIPT
+     ==================================================== -->
+<script>
+(function () {
+  'use strict';
+
+  /* Header transparency + scroll */
+  var header = document.getElementById('site-header');
+  var hero = document.getElementById('home');
+
+  function updateHeader() {
+    var y = window.scrollY;
+    var heroH = hero ? hero.offsetHeight - 80 : 500;
+    if (y > heroH) {
+      header.classList.remove('hero-top');
+      header.classList.toggle('scrolled', y > 50);
+    } else if (y > 50) {
+      header.classList.remove('hero-top');
+      header.classList.add('scrolled');
+    } else {
+      header.classList.add('hero-top');
+      header.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
+
+  /* Hamburger */
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', function () {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    });
+  });
+
+  /* Smooth scroll — offset for fixed header */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = this.getAttribute('href');
+      if (id === '#') return;
+      var target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        var hdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr')) || 68;
+        var top = target.getBoundingClientRect().top + window.scrollY - hdrH;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* Scroll reveal */
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function (el, i) {
+    var siblings = Array.from(el.parentElement ? el.parentElement.querySelectorAll('.reveal') : []);
+    var idx = siblings.indexOf(el);
+    el.style.transitionDelay = Math.min(idx * 0.1, 0.4) + 's';
+    observer.observe(el);
+  });
+
+  /* Newsletter */
+  var nlBtn = document.getElementById('nl-btn');
+  var nlEmail = document.getElementById('nl-email');
+  if (nlBtn && nlEmail) {
+    nlBtn.addEventListener('click', function () {
+      var v = nlEmail.value.trim();
+      if (v && v.includes('@') && v.includes('.')) {
+        nlEmail.value = '';
+        nlEmail.placeholder = "You're in! ✓";
+        nlEmail.disabled = true;
+        nlBtn.textContent = '✓';
+        nlBtn.disabled = true;
+        nlBtn.style.background = '#2a7a1a';
+      } else {
+        nlEmail.style.outline = '2px solid #C4622D';
+        nlEmail.focus();
+        setTimeout(function () { nlEmail.style.outline = ''; }, 2000);
+      }
+    });
+    nlEmail.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') nlBtn.click();
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
